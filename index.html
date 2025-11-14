@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tiệc Nhà Mới - 4/12/2025 🏡</title>
+  <link rel="icon" type="image/x-icon" href="🏡">
   <style>
     * {
       margin: 0;
@@ -363,7 +364,7 @@
       <h2>Xác nhận tham dự</h2>
 
       <div class="form-container" id="rsvpForm">
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>TÊN CỦA BẠN</label>
           <input type="text" id="name" placeholder="Nhập tên của bạn" required>
         </div>
@@ -382,9 +383,9 @@
         <div class="form-group">
           <label>LỜI NHẮN (không bắt buộc)</label>
           <textarea id="message" rows="4" placeholder="Gửi lời chúc của bạn..."></textarea>
-        </div>
+        </div> -->
 
-        <button onclick="submitForm()">Xác nhận</button>
+        <button onclick="location.href = 'https://forms.gle/7o2YoCzSpPN4EbzN9' ">Xác nhận</button>
       </div>
 
       <div class="success-message" id="successMessage">
@@ -401,7 +402,7 @@
     </div>
   </div>
 
-  <script>
+  <!-- <script>
     function submitForm() {
       const name = document.getElementById('name').value.trim();
       
@@ -428,6 +429,7 @@
 
       console.log('RSVP:', { name, guests, message });
     }
-  </script>
+  </script> -->
+  
 </body>
 </html>
