@@ -226,11 +226,91 @@
       margin-bottom: 4rem;
     }
 
-    .image img {
+    /* Carousel */
+    .carousel {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+      overflow: hidden;
       border-radius: 20px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      max-width: 100%;
+    }
+
+    .carousel-container {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .carousel-slide img {
+      width: 100%;
       height: auto;
+      display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      font-size: 1.5rem;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      z-index: 10;
+      padding: 0;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255, 255, 255, 0.5);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-btn.prev {
+      left: 15px;
+    }
+
+    .carousel-btn.next {
+      right: 15px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .carousel-dot.active {
+      background: white;
+      transform: scale(1.2);
     }
 
     .intro, .details, .rsvp {
@@ -341,7 +421,6 @@
       width: 100%;
       padding: 1rem;
       background: #9C27B0;
-      /* rgba(255, 255, 255, 0.25); */
       backdrop-filter: blur(10px);
       color: white;
       font-weight: 400;
@@ -451,6 +530,20 @@
       .guest-counter-number {
         font-size: 3rem;
       }
+
+      .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+      }
+
+      .carousel-btn.prev {
+        left: 10px;
+      }
+
+      .carousel-btn.next {
+        right: 10px;
+      }
     }
   </style>
 </head>
@@ -491,29 +584,51 @@
       </div>
     </div>
 
+    <!-- Carousel -->
     <div class="image fade-in">
-      <img src="design.jpg" width="350" height="450" alt="">
-    </div>
-      <!-- Countdown Timer -->
-      <div class="countdown fade-in" id="countdown">
-        <div class="countdown-item">
-          <span class="countdown-number" id="days">00</span>
-          <span class="countdown-label">Ngày</span>
+      <div class="carousel">
+        <div class="carousel-container" id="carouselContainer">
+          <div class="carousel-slide">
+            <img src="home1.jpg" width="350" height="450" alt="Ảnh 1">
+          </div>
+          <div class="carousel-slide">
+            <img src="home2.jpg" width="350" height="450" alt="Ảnh 2">
+          </div>
+          <div class="carousel-slide">
+            <img src="home3.jpg" width="350" height="450" alt="Ảnh 3">
+          </div>
+          <div class="carousel-slide">
+            <img src="home4.jpg" width="350" height="450" alt="Ảnh 4">
+          </div>
+          <div class="carousel-slide">
+            <img src="home5.jpg" width="350" height="450" alt="Ảnh 5">
+          </div>
         </div>
-        <div class="countdown-item">
-          <span class="countdown-number" id="hours">00</span>
-          <span class="countdown-label">Giờ</span>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-number" id="minutes">00</span>
-          <span class="countdown-label">Phút</span>
-        </div>
-        <div class="countdown-item">
-          <span class="countdown-number" id="seconds">00</span>
-          <span class="countdown-label">Giây</span>
-        </div>
+        <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
+        <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
+        <div class="carousel-dots" id="carouselDots"></div>
       </div>
-    
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="countdown fade-in" id="countdown">
+      <div class="countdown-item">
+        <span class="countdown-number" id="days">00</span>
+        <span class="countdown-label">Ngày</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="hours">00</span>
+        <span class="countdown-label">Giờ</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="minutes">00</span>
+        <span class="countdown-label">Phút</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="seconds">00</span>
+        <span class="countdown-label">Giây</span>
+      </div>
+    </div>
 
     <!-- Divider -->
     <div class="divider fade-in">
@@ -586,6 +701,65 @@
   </div>
 
   <script>
+    // Carousel functionality
+    let currentSlide = 0;
+    const totalSlides = 5;
+
+    function initCarousel() {
+      const dotsContainer = document.getElementById('carouselDots');
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot';
+        if (i === 0) dot.classList.add('active');
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function moveCarousel(direction) {
+      currentSlide += direction;
+      if (currentSlide < 0) currentSlide = totalSlides - 1;
+      if (currentSlide >= totalSlides) currentSlide = 0;
+      updateCarousel();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      const container = document.getElementById('carouselContainer');
+      container.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Update dots
+      const dots = document.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    // Auto-play carousel
+    let autoPlayInterval;
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(() => {
+        moveCarousel(1);
+      }, 5000);
+    }
+
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+
+    // Pause autoplay on hover
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = document.querySelector('.carousel');
+      if (carousel) {
+        carousel.addEventListener('mouseenter', stopAutoPlay);
+        carousel.addEventListener('mouseleave', startAutoPlay);
+      }
+    });
+
     // Create floating particles
     function createParticles() {
       const particles = document.getElementById('particles');
@@ -688,6 +862,8 @@
 
     // Initialize
     window.addEventListener('load', () => {
+      initCarousel();
+      startAutoPlay();
       createParticles();
       updateCountdown();
       setInterval(updateCountdown, 1000);
