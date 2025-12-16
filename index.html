@@ -247,6 +247,17 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
 
+    h2.date {
+      font-family: "Noto Serif", "Merriweather", serif;
+      font-size: 2rem;
+      font-style: italic;
+      color: white;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      text-align: center;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
     .intro p {
       font-size: 1.125rem;
       color: rgba(255, 255, 255, 0.95);
@@ -400,6 +411,11 @@
         font-size: 1.5rem;
       }
 
+      h2.date {
+        font-size: 1.5rem;
+        font-style: italic;
+      }
+
       .container {
         padding: 2rem 1rem;
       }
@@ -462,10 +478,23 @@
     <!-- Hero Section -->
     <div class="hero fade-in">
       <h1>Tiệc Nhà Mới</h1>
+      <h2 class="date">27/12/2025</h2>
       <div class="star">✵</div>
-      
+      <!-- Intro -->
+      <div class="intro fade-in glass-card">
+        <h2>Chúng tôi rất vui mừng được mời bạn!</h2>
+        <p>
+          Hãy đến chia vui cùng chúng tôi trong ngày đặc biệt này. 
+          Không gian ấm cúng, bạn bè thân thiết, và những kỷ niệm đẹp đang chờ đón.
+        </p>
+      </div>
+    </div>
+
+    <div class="image fade-in">
+      <img src="design.jpg" width="350" height="450" alt="">
+    </div>
       <!-- Countdown Timer -->
-      <div class="countdown" id="countdown">
+      <div class="countdown fade-in" id="countdown">
         <div class="countdown-item">
           <span class="countdown-number" id="days">00</span>
           <span class="countdown-label">Ngày</span>
@@ -483,20 +512,7 @@
           <span class="countdown-label">Giây</span>
         </div>
       </div>
-    </div>
-
-    <div class="image fade-in">
-      <img src="design.jpg" width="350" height="450" alt="">
-    </div>
-
-    <!-- Intro -->
-    <div class="intro fade-in glass-card">
-      <h2>Chúng tôi rất vui mừng được mời bạn!</h2>
-      <p>
-        Hãy đến chia vui cùng chúng tôi trong ngày đặc biệt này. 
-        Không gian ấm cúng, bạn bè thân thiết, và những kỷ niệm đẹp đang chờ đón.
-      </p>
-    </div>
+    
 
     <!-- Divider -->
     <div class="divider fade-in">
