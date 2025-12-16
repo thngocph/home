@@ -328,7 +328,8 @@
     button {
       width: 100%;
       padding: 1rem;
-      background: rgba(255, 255, 255, 0.25);
+      background: #9C27B0;
+      /* rgba(255, 255, 255, 0.25); */
       backdrop-filter: blur(10px);
       color: white;
       font-weight: 400;
@@ -420,13 +421,14 @@
         font-size: 2rem;
       }
 
-      .hamburger-menu, .music-control {
+      .hamburger-menu{
         top: 1rem;
         right: 1rem;
       }
 
       .music-control {
         bottom: 1rem;
+        right: 1rem;
       }
 
       .guest-counter-number {
@@ -505,7 +507,7 @@
 
     <!-- Details -->
     <div class="details fade-in">
-      <h2>Chúng tôi sẽ gặp nhau tại...</h2>
+      <h2>Chúng mình sẽ gặp nhau tại...</h2>
       
       <div class="detail-item glass-card">
         <div class="detail-row">
@@ -549,11 +551,10 @@
     <div class="rsvp fade-in">
       <h2>Xác nhận tham dự</h2>
 
-      <div class="form-container glass-card">
+      <div class="form-container">
         <button onclick="location.href = 'https://forms.gle/7o2YoCzSpPN4EbzN9'">Xác nhận</button>
-        
         <!-- Guest Counter -->
-        <div class="guest-counter">
+        <div class="guest-counter glass-card">
           <div class="guest-counter-number" id="guestCount">0</div>
           <div class="guest-counter-label">Người sẽ tham dự</div>
         </div>
